@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./demo
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
