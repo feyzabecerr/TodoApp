@@ -5,12 +5,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "task_sequence",
+            sequenceName = "my_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "task_sequence"
+    )
+
     private Long id;
 
     private String description;
@@ -19,7 +29,6 @@ public class Task {
     private LocalDate date;
 
     private boolean isActive;
-
     protected Task(){
 
     }
@@ -61,5 +70,6 @@ public class Task {
     public void setActive(boolean active) {
         isActive = active;
     }
+
 
 }
