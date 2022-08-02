@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,13 +29,13 @@ public class UserController
                 orElseThrow(() -> new IllegalStateException("user with " + id + " doesn't exist"));
     }
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @PostMapping("/{id}/tasks")
-    public ResponseEntity<User> addTasktoUser(@PathVariable long id, @RequestBody Task task){
+    public ResponseEntity<User> addTasktoUser(@Valid @PathVariable long id, @RequestBody Task task){
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException());
         user.getTaskList().add(task);
         return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(user));

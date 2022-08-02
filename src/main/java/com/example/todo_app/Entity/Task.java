@@ -1,13 +1,19 @@
 package com.example.todo_app.Entity;
 
-import org.hibernate.annotations.GeneratorType;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Task {
     @Id
@@ -23,53 +29,13 @@ public class Task {
 
     private Long id;
 
+
+    @NotBlank(message = "Description is mandatory")
     private String description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     private boolean isActive;
-    protected Task(){
-
-    }
-
-    public Task(String description, LocalDate date, boolean isActive) {
-        this.description = description;
-        this.date = date;
-        this.isActive = isActive;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
 
 }
