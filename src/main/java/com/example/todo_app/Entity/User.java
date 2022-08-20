@@ -41,8 +41,7 @@ public class User
     @NotBlank(message = "Password is mandatory")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Task> taskList;
 
 }
